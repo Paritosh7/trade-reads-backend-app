@@ -1,0 +1,10 @@
+services:
+  web:
+    build: ./trade_reads_backend
+    command: python manage.py runserver 0.0.0.0:8000
+    volumes:
+      - ./trade_reads_backend/:/usr/src/djangotrade_reads_backend
+    ports:
+      - 8000:8000
+    env_file:
+      - ./.env.dev
