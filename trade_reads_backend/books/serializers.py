@@ -2,7 +2,7 @@ from rest_framework import serializers
 
 from .models import Book
 
-class BookSerializer(serializers.ModelSerializers):
+class BookSerializer(serializers.ModelSerializer):
     class Meta:
         model = Book
         fields = ('id', 'title', 'description', 'image_url')

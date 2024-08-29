@@ -30,10 +30,10 @@ class Book(models.Model):
     publisher = models.CharField(blank = True, max_length=50)
     published_date = models.DateField(blank=True, null=True)
     # wishlist here
-    image = models.ImageField(upload_to='uploads/properties')
+    image = models.ImageField(upload_to='uploads/books')
     owner = models.ForeignKey(User, related_name='books', on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
     
     def image_url(self):
-        return f'{settings.WEBSITE_URL}{self.image_url}'
+        return f'{settings.WEBSITE_URL}{self.image.url}'
     
