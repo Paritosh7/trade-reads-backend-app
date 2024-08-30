@@ -3,7 +3,7 @@ from django.http import JsonResponse
 from rest_framework.decorators import api_view, authentication_classes, permission_classes
 
 from .models import Book
-from .serializers import BookSerializer
+from .serializers import BookSerializer, BookDetailSerializer
 from .forms import BookForm
 
 @api_view(["GET"])
@@ -11,11 +11,26 @@ from .forms import BookForm
 @permission_classes([])
 def book_list(request):
     books = Book.objects.all()
+    
+    owner_id = request.GET.get('owner_id', '')
+    
+    if owner_id:
+        books = books.filter(owner_id=owner_id)
+        
     serializer = BookSerializer(books, many=True)
     
     return JsonResponse({
         'data': serializer.data
     })
+    
+@api_view(["GET"])
+@authentication_classes([])
+@permission_classes([])
+def book_detail(request, pk):
+    book = Book.objects.get(pk=pk)
+    serializer = BookDetailSerializer(book, many=False)
+    
+    return JsonResponse(serializer.data)
 
 
 @api_view(['POST', 'FILES'])
