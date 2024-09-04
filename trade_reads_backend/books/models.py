@@ -29,7 +29,7 @@ class Book(models.Model):
     pages = models.PositiveIntegerField(blank=True, null=True)
     publisher = models.CharField(blank = True, max_length=50)
     published_date = models.DateField(blank=True, null=True)
-    # wishlist here
+    interested = models.ManyToManyField(User, related_name="wishlist", blank=True)
     image = models.ImageField(upload_to='uploads/books')
     owner = models.ForeignKey(User, related_name='books', on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
