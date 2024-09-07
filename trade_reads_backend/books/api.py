@@ -27,9 +27,13 @@ def book_list(request):
     books = Book.objects.all()
     
     owner_id = request.GET.get('owner_id', '')
+    is_wishlist = request.GET.get('is_wishlist', '')
     
     if owner_id:
         books = books.filter(owner_id=owner_id)
+        
+    if is_wishlist:
+        books = books.filter(interested__in=[user])
     
     wishlist = []
     
