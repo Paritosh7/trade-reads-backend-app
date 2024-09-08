@@ -2,6 +2,7 @@ from django.http import JsonResponse
 
 from rest_framework.decorators import api_view, authentication_classes, permission_classes
 from rest_framework_simplejwt.tokens import AccessToken
+from django.db.models import Q
 from .models import Book
 from .serializers import BookSerializer, BookDetailSerializer
 from .forms import BookForm
@@ -15,7 +16,6 @@ def book_list(request):
     try:
         token = request.META['HTTP_AUTHORIZATION'].split('Bearer ')[1]
         token = AccessToken(token)
-        print("token ", token)
         user_id = token.payload['user_id']
         
         user = User.objects.get(pk=user_id)
@@ -25,6 +25,17 @@ def book_list(request):
     
     
     books = Book.objects.all()
+    
+    # Search Query
+    search_query = request.GET.get('q', '') 
+    
+    print("search query : ",search_query)
+
+    if search_query:
+        books = books.filter(
+            Q(title__icontains=search_query) |
+            Q(author__icontains=search_query) 
+        )
     
     owner_id = request.GET.get('owner_id', '')
     is_wishlist = request.GET.get('is_wishlist', '')
