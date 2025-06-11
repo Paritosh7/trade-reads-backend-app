@@ -1,6 +1,12 @@
 # TradeReads Backend
 
-This is the backend API and real-time messaging server for the TradeReads book exchange platform. It is built with Django, Django REST Framework, and Django Channels, providing robust APIs for user management, book listings, wishlists, and real-time chat.
+This is the backend web application for the TradeReads book exchange platform. It is built with Django, Django REST Framework, and Django Channels, providing robust APIs for user management, book listings, wishlists, and real-time chat.
+
+---
+
+## Related Project
+
+- [TradeReads UI (Frontend)](../trade-reads-frontend/README.md) — The Next.js React frontend for this backend.
 
 ---
 
@@ -42,13 +48,9 @@ cd backend
 
 ### 2. Environment Variables
 
-Copy `.env.dev` and set your secrets and database config:
+Create `.env.dev` and set your secrets and database config:
 
-```bash
-cp .env.dev .env
-```
-
-Edit `.env` as needed (see comments in the file for guidance).
+see `.env.example` comments in the file for guidance
 
 ### 3. Install Dependencies
 
@@ -78,7 +80,7 @@ Or, for real-time features (WebSockets):
 daphne -b 0.0.0.0 -p 8000 trade_reads_backend.trade_reads_backend.asgi:application
 ```
 
-### 6. Docker (Recommended for Production)
+### 6. Docker (Recommended)
 
 ```bash
 docker-compose up --build
@@ -114,24 +116,6 @@ docker-compose up --build
 ## Testing
 
 Basic test files are scaffolded in each app. Extend these for your own test coverage.
-
----
-
-## Screenshots
-
-Place backend/admin/API screenshots in `backend/screenshots/` and reference them here:
-
-```
-backend/
-└── screenshots/
-    ├── admin.png
-    ├── api-example.png
-```
-
-Example:
-
-![Admin Panel](screenshots/admin.png)
-![API Example](screenshots/api-example.png)
 
 ---
 
