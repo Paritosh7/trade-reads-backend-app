@@ -7,7 +7,7 @@ from rest_framework.decorators import api_view, authentication_classes, permissi
 @api_view(['GET'])
 @authentication_classes([])
 @permission_classes([])
-def owner_detail(request, pk):
+def user_detail(request, pk):
     user = User.objects.get(pk=pk)
     serializer = UserDetailSerializer(user, many=False)
     

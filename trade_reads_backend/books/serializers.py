@@ -12,4 +12,4 @@ class BookDetailSerializer(serializers.ModelSerializer):
     owner = UserDetailSerializer(read_only=True, many=False)
     class Meta:
         model = Book
-        fields = ('id', 'title', 'description', 'author', 'language', 'pages', 'publisher', 'published_date', 'image_url', 'owner')
+        fields = ('id', 'title', 'description', 'author', 'language', 'pages', 'publisher', 'published_date', 'interested', 'image_url', 'owner')
